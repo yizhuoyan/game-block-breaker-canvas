@@ -33,29 +33,28 @@
 			this.ball;
 			this.paddle;
 			this.blockWall;
-			document.addEventListener("keydown", this._handleKeyDown.bind(this));
-			document.addEventListener("keyup", this._handleKeyUp.bind(this));
+			document.addEventListener("keydown", this);
+			document.addEventListener("keyup", this);
 		};
-
+		
 		Constructor.prototype = {
-			_handleKeyDown: function(evt) {
-				switch(evt.keyCode) {
-					case 37:
-						this.paddle.moveLeft();
-						break;
-					case 39:
-						this.paddle.moveRight();
-						break;
-				}
-			},
-			_handleKeyUp: function(evt) {
-				switch(evt.keyCode) {
-					case 37:
-					case 39:
-						this.paddle.moveStop();
-						break;
-					default:
-						break;
+			handleEvent: function(evt) {
+				if(evt.type==="keyup"){
+					switch(evt.keyCode) {
+						case 37:
+						case 39:
+							this.paddle.moveStop();
+							break;
+					}
+				}else if(evt.type==="keydown"){
+					switch(evt.keyCode) {
+						case 37:
+							this.paddle.moveLeft();
+							break;
+						case 39:
+							this.paddle.moveRight();
+							break;
+					}
 				}
 			},
 			restart: function() {
